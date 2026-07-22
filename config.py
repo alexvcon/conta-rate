@@ -1,10 +1,10 @@
 import os
-
+from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv()
+BASE_DIR = Path(__file__).resolve().parent
+load_dotenv(BASE_DIR / ".env")
 
 class Config:
-    SECRET_KEY = os.getenv("SECRET_KEY")
-    DATABASE = os.getenv("DATABASE", "database/test_db.sqlite3")
+    DATABASE = os.getenv("DATABASE", str(BASE_DIR / "database" / "test_db.sqlite3"))
     DEBUG = os.getenv("DEBUG", "False").lower() == "true"
